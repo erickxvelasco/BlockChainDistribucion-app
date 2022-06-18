@@ -5,12 +5,12 @@ class Blockchain {
   constructor() {
     this.chain = [];
     this.height = -1;
-    this.initializeChain();
+    //this.initializeChain();
   }
 
   async initializeChain() {
     if (this.height === -1) {
-      const block = new Block({ data: "Genesis Block" });
+      const block = new Block({ data: "bloque ancla" });
       await this.addBlock(block);
     }
   }

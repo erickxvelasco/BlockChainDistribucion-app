@@ -2,12 +2,13 @@ const SHA256 = require("crypto-js/sha256");
 const hex2ascii = require("hex2ascii");
 
 class Block {
-  constructor(data) {
+  constructor(data,correo) {
     this.hash = null;
     this.height = 0;
     this.body = Buffer.from(JSON.stringify(data).toString("hex"));
     this.time = 0;
     this.previousBlockHash = null;
+    this.correo = correo;
   }
 
   validate() {
@@ -33,7 +34,7 @@ class Block {
       let dataObject = JSON.parse(decodedData);
 
       if (dataObject === "Genesis Block") {
-        reject(new Error("This is the Genesis Block"));
+        reject(new Error("Bloque Corrupto"));
       }
 
       resolve(dataObject);
@@ -41,8 +42,8 @@ class Block {
   }
 
   toString() {
-    const { hash, height, body, time, previousBlockHash } = this;
-    return `Block -
+    const { hash, height, body, time, previousBlockHash, correo } = this;
+    return `Block - ${correo}
         hash: ${hash}
         height: ${height}
         body: ${body}
